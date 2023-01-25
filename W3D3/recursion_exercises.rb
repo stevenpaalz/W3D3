@@ -94,30 +94,55 @@ def rec_fib(n)
 end
 require "byebug"
 def bsearch(arr, target)
-    # if arr.length == 1 && arr[0] == target
-    #     return 
+
     return nil if arr.length == 1 && arr[0] != target
-    
+        
     left = arr[0...arr.length/2]
     right = arr[arr.length/2 + 1..-1]
     return left.length if arr[arr.length/2] == target
 
     if target > arr[arr.length/2]
-       bsearch(right, target) + left.length
-    # elsif target < arr[arr.length/2]
-        # resultidx += bsearch(left, target)
+        right_position = bsearch(right, target)
+        return nil if right_position == nil
+        right_position + left.length + 1
     else
-        bsearch(left, target)
+        left_position = bsearch(left, target)
+        return nil if left_position == nil
+        left_position
     end
 
 end
 # debugger
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 # p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 # p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
+
+def merge_sort(arr)
+    return arr if arr.length == 1 || arr.length == 0
+    left = arr[0...arr.length/2]
+    right = arr[arr.length/2..-1]
+    merge(merge_sort(left), merge_sort(right))
+end
+
+def merge(arr1, arr2)
+    result = []
+    while arr1.length > 0 && arr2.length > 0 do 
+        if arr1[0] < arr2[0]
+            result << arr1.shift
+        else
+            result << arr2.shift
+        end
+    end
+    if arr1.empty?
+        result += arr2
+    else
+        result += arr1
+    end
+    result
+end
