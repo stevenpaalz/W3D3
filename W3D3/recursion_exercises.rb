@@ -18,3 +18,39 @@ def rec_sum(arr)
 
     rec_sum(arr[1..-1]) + arr[0]
 end
+
+require "byebug"
+def exp_1(base, num)
+    return 1 if num == 0
+    base * exp_1(base, num - 1)
+end
+
+# def exp_2(base, num)
+#     return 1 if num == 0
+#     return base if num == 1
+
+#     if num.even? 
+#         last = exp_2(base, (num - 1 - 1) / 2)
+#         base ** 2 * last
+#     else
+#         last = exp_2(base, ((num - 1) / 2))
+#         base ** 2 * last
+#     end
+# end
+
+# debugger
+# p exp_2(3, 4)
+
+
+def exp_2(base, num)
+    return 1 if num == 0
+    return base if num == 1
+
+    if num.even?
+        half_num_prior = exp_2(base, num / 2)
+        half_num_prior * half_num_prior
+    else
+        halfish_prior = exp_2(base, (num - 1) /2)
+        base * halfish_prior * halfish_prior
+    end
+end
