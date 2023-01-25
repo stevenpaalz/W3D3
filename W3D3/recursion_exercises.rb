@@ -92,4 +92,32 @@ def rec_fib(n)
     prior = rec_fib(n - 1)
     prior << (prior[-1] + prior[-2])
 end
+require "byebug"
+def bsearch(arr, target)
+    # if arr.length == 1 && arr[0] == target
+    #     return 
+    return nil if arr.length == 1 && arr[0] != target
+    
+    left = arr[0...arr.length/2]
+    right = arr[arr.length/2 + 1..-1]
+    return left.length if arr[arr.length/2] == target
+
+    if target > arr[arr.length/2]
+       bsearch(right, target) + left.length
+    # elsif target < arr[arr.length/2]
+        # resultidx += bsearch(left, target)
+    else
+        bsearch(left, target)
+    end
+
+end
+# debugger
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
