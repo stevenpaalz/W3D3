@@ -54,3 +54,26 @@ def exp_2(base, num)
         base * halfish_prior * halfish_prior
     end
 end
+
+class Array
+
+
+    def deep_dup
+        self.map do |ele|
+            if ele.is_a?(Array)
+                ele.deep_dup
+            else
+                ele.dup
+            end
+        end
+
+            
+            
+    end
+
+            
+        
+
+    
+
+end
