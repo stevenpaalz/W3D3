@@ -57,7 +57,6 @@ end
 
 class Array
 
-
     def deep_dup
         self.map do |ele|
             if ele.is_a?(Array)
@@ -66,14 +65,31 @@ class Array
                 ele.dup
             end
         end
-
-            
-            
-    end
-
-            
-        
-
-    
+  
+    end   
 
 end
+
+def iter_fib(n)
+
+    result = [0, 1]
+    
+    return result.take(n) if n < 2
+
+    i = 2
+    while i < n 
+        result << result[-1] + result[-2]
+
+        i+=1
+    end
+    result
+end
+
+def rec_fib(n)
+    result = [0, 1]
+    
+    return result.take(n) if n <= 2
+    prior = rec_fib(n - 1)
+    prior << (prior[-1] + prior[-2])
+end
+
