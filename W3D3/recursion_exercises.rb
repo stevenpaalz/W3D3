@@ -146,3 +146,27 @@ def merge(arr1, arr2)
     end
     result
 end
+
+
+def subsets(arr)
+    if arr.length == 0 
+         return [arr]
+    end
+    # if arr.length == 1
+    #     return [[],arr]
+    # end
+    prior_arr = subsets(arr[0...-1])
+    prior_arr.uniq.each do |subarr|
+        prior_arr << (subarr.dup << arr[-1])
+
+    end
+    return prior_arr
+end
+
+# debugger
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+# debugger
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3])
+# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
