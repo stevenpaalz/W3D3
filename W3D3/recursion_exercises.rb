@@ -164,9 +164,27 @@ def subsets(arr)
 end
 
 # debugger
-p subsets([]) # => [[]]
-p subsets([1]) # => [[], [1]]
-# debugger
-p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
-p subsets([1, 2, 3])
-# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+# p subsets([]) # => [[]]
+# p subsets([1]) # => [[], [1]]
+# # debugger
+# p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+# p subsets([1, 2, 3])
+# # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
+
+def permutations(array)
+    return [array] if array.length == 1
+    result = []
+    prior = permutations(array[0...-1])
+    prior.each do |subarr|
+        new_subarr = []
+        (0...subarr.length).each do |i|
+            new_subarr = subarr[0..i] + [array[-1]] + subarr[i+1..-1]
+        end
+        result << new_subarr
+    end
+    result
+end
+
+debugger
+p permutations([1, 2, 3])
